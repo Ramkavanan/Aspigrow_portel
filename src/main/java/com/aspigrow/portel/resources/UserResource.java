@@ -1,20 +1,13 @@
 package  com.aspigrow.portel.resources;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,6 +17,12 @@ import com.aspigrow.portel.model.ErrorResponseWrapper;
 import com.aspigrow.portel.model.UserModel;
 import com.aspigrow.portel.service.UserService;
 import com.aspigrow.portel.util.Validator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Path("/user")
 @Api(value = "User", description = "This api allows user authentication," +
@@ -103,9 +102,11 @@ public class UserResource {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Input data error"),
             @ApiResponse(code = 500, message = "Internal server error")})
-    public Response doLogin(@RequestBody UserModel user) {
+    public Response doLogin(@RequestBody String json) {
 	System.out.println("Came Resource iumpl");
         try {
+        	ObjectMapper objectMapper = new ObjectMapper();
+        	UserModel user = objectMapper.readValue(json, UserModel.class);
         	if(user.getEmailId() == null || user.getPassword() == null){
                 return Response.status(400)
                         .entity(null).build();
