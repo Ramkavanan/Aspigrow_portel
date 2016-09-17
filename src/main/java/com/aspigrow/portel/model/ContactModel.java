@@ -5,6 +5,8 @@
 
 package com.aspigrow.portel.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Model class used to expose this attribute with UI 
  * and make getting UI input as below Model format to perform
@@ -21,40 +23,56 @@ public class ContactModel {
    
 	private String externalId;
 	
-	private AccountModel Account;
+	@JsonProperty("Account")
+	private String Account;
 	
-	private String First_Name;
+	@JsonProperty("FirstName")
+	private String FirstName;
 	
-	private String Last_Name;
+	@JsonProperty("LastName")
+	private String LastName;
 	
+	@JsonProperty("Email")
 	private String Email;
 	
+	@JsonProperty("Phone")
 	private String Phone;
+	
+	@JsonProperty("ContId")
+	private String ContId;
 
     public ContactModel() {}
     
-	public AccountModel getAccount() {
+	public String getAccount() {
 		return Account;
 	}
 
-	public void setAccount(AccountModel account) {
+	public void setAccount(String account) {
 		Account = account;
 	}
 
-	public String getFirst_Name() {
-		return First_Name;
+	public String getFirstName() {
+		return FirstName;
 	}
 
-	public void setFirst_Name(String first_Name) {
-		First_Name = first_Name;
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
 	}
 
-	public String getLast_Name() {
-		return Last_Name;
+	public String getLastName() {
+		return LastName;
 	}
 
-	public void setLast_Name(String last_Name) {
-		Last_Name = last_Name;
+	public void setLastName(String lastName) {
+		LastName = lastName;
+	}
+
+	public String getContId() {
+		return ContId;
+	}
+
+	public void setContId(String contId) {
+		ContId = contId;
 	}
 
 	public String getEmail() {

@@ -27,6 +27,8 @@ public class QuesProcessHeaderModelConvertor implements Convertor<QuesProcessHea
         }
         QuestionriesProposalHeader quesHeader = new QuestionriesProposalHeader();
         quesHeader.setExternalId(model.getExternalId());
+        quesHeader.setName(model.getQuesName());
+        quesHeader.setStatus(model.getStatus());
         return quesHeader;
     }
 
@@ -37,6 +39,8 @@ public class QuesProcessHeaderModelConvertor implements Convertor<QuesProcessHea
         }
         QuesProcessHeaderModel quesHeader = new QuesProcessHeaderModel();
         quesHeader.setExternalId(entity.getExternalId());
+        quesHeader.setQuesName(entity.getName());
+        quesHeader.setStatus(entity.getStatus());
         return quesHeader;
     }
 

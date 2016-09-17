@@ -5,6 +5,8 @@
 
 package com.aspigrow.portel.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Model class used to expose this attribute with UI 
  * and make getting UI input as below Model format to perform
@@ -19,38 +21,72 @@ package com.aspigrow.portel.model;
 
 public class AccountModel {
    
+	@JsonProperty("AccName")
+	private String AccName;
+	
+	@JsonProperty("AccNumber")
+	private String AccNumber;
+	
+	@JsonProperty("AccSite")
+	private String AccSite;
+	
+	@JsonProperty("AccId")
 	private String externalId;
 	
-	private String Name;
+	@JsonProperty("Contact")
+	private ContactModel[] Contact;
 	
-	private String AccountNumber;
-	
-	private String Site;
+	@JsonProperty("Opportunity")
+	private OpportunityModel Opportunity;
 	
     public AccountModel() {}
     
-	public String getName() {
-		return Name;
+	public ContactModel[] getContact() {
+		return Contact;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setContact(ContactModel[] contact) {
+		Contact = contact;
 	}
 
-	public String getAccountNumber() {
-		return AccountNumber;
+	public OpportunityModel getOpportunity() {
+		return Opportunity;
 	}
 
-	public void setAccountNumber(String accountNumber) {
-		AccountNumber = accountNumber;
+	public void setOpportunity(OpportunityModel opportunity) {
+		Opportunity = opportunity;
 	}
 
-	public String getSite() {
-		return Site;
+	public String getAccId() {
+		return externalId;
 	}
 
-	public void setSite(String site) {
-		Site = site;
+	public void setAccId(String accId) {
+		externalId = accId;
+	}
+
+	public String getAccName() {
+		return AccName;
+	}
+
+	public void setAccName(String accName) {
+		AccName = accName;
+	}
+
+	public String getAccNumber() {
+		return AccNumber;
+	}
+
+	public void setAccNumber(String accNumber) {
+		AccNumber = accNumber;
+	}
+
+	public String getAccSite() {
+		return AccSite;
+	}
+
+	public void setAccSite(String accSite) {
+		AccSite = accSite;
 	}
 
 	public String getExternalId() {

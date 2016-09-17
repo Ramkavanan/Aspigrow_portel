@@ -5,6 +5,8 @@
 
 package com.aspigrow.portel.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Model class used to expose this attribute with UI 
  * and make getting UI input as below Model format to perform
@@ -21,24 +23,33 @@ public class QuesProcessHeaderModel {
    
 	private String externalId;
 	
-	private String Name;
+	@JsonProperty("Opportunity")
+	private String Opportunity;
 	
+	@JsonProperty("QuesName")
+	private String QuesName;
+	
+	@JsonProperty("Contact")
+	private String Contact;
+	
+	@JsonProperty("Status")
+	private String Status;
+	
+	@JsonProperty("CF_Agreement__c")
 	private AgreementModel CF_Agreement__c;
 	
-	private OpportunityModel CF_Opportunity__c;
+	@JsonProperty("QuestProcessLineItems")
+	private QuesProcessLineItemModel[] QuestProcessLineItems;
 	
-	private ContactModel CF_Contact__c;
-	
-	private String CF_Status__c;
-
     public QuesProcessHeaderModel() {}
     
-	public String getName() {
-		return Name;
+	public QuesProcessLineItemModel[] getQuestProcessLineItems() {
+		return QuestProcessLineItems;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setQuestProcessLineItems(
+			QuesProcessLineItemModel[] questProcessLineItems) {
+		QuestProcessLineItems = questProcessLineItems;
 	}
 
 	public AgreementModel getCF_Agreement__c() {
@@ -48,29 +59,37 @@ public class QuesProcessHeaderModel {
 	public void setCF_Agreement__c(AgreementModel cF_Agreement__c) {
 		CF_Agreement__c = cF_Agreement__c;
 	}
-
-	public OpportunityModel getCF_Opportunity__c() {
-		return CF_Opportunity__c;
+	
+	public String getOpportunity() {
+		return Opportunity;
 	}
 
-	public void setCF_Opportunity__c(OpportunityModel cF_Opportunity__c) {
-		CF_Opportunity__c = cF_Opportunity__c;
+	public void setOpportunity(String opportunity) {
+		Opportunity = opportunity;
 	}
 
-	public ContactModel getCF_Contact__c() {
-		return CF_Contact__c;
+	public String getQuesName() {
+		return QuesName;
 	}
 
-	public void setCF_Contact__c(ContactModel cF_Contact__c) {
-		CF_Contact__c = cF_Contact__c;
+	public void setQuesName(String quesName) {
+		QuesName = quesName;
 	}
 
-	public String getCF_Status__c() {
-		return CF_Status__c;
+	public String getContact() {
+		return Contact;
 	}
 
-	public void setCF_Status__c(String cF_Status__c) {
-		CF_Status__c = cF_Status__c;
+	public void setContact(String contact) {
+		Contact = contact;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
 	}
 
 	public String getExternalId() {

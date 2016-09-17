@@ -27,6 +27,10 @@ public class ContactModelConvertor implements Convertor<ContactModel, Contact> {
         }
         Contact contact = new Contact();
         contact.setExternalId(model.getExternalId());
+        contact.setEmail(model.getEmail());
+        contact.setFirstName(model.getFirstName());
+        contact.setLastName(model.getLastName());
+        contact.setPhone(model.getPhone());
         return contact;
     }
 
@@ -37,6 +41,10 @@ public class ContactModelConvertor implements Convertor<ContactModel, Contact> {
         }
         ContactModel contact = new ContactModel();
         contact.setExternalId(entity.getExternalId());
+        contact.setEmail(entity.getEmail());
+        contact.setFirstName(entity.getFirstName());
+        contact.setLastName(entity.getLastName());
+        contact.setPhone(entity.getPhone());
         return contact;
     }
 

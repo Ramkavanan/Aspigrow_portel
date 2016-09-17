@@ -5,6 +5,8 @@
 
 package com.aspigrow.portel.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Model class used to expose this attribute with UI 
  * and make getting UI input as below Model format to perform
@@ -21,78 +23,96 @@ public class QuesProcessLineItemModel {
    
 	private String externalId;
 	
-	private String Name;
+	@JsonProperty("Comments")
+	private String Comments;
 	
-	private String CF_Answer__c;
+	@JsonProperty("Answer")
+	private String Answer;
 	
-	private String CF_Comments__c;
+	@JsonProperty("PicklistOtions")
+	private String PicklistOtions;
 	
-	private String CF_Help_Text__c;
+	@JsonProperty("HelpText")
+	private String HelpText;
 	
-	private String CF_Picklist_Options__c;
+	@JsonProperty("Type")
+	private String Type;
 	
-	private String CF_Question__c;
+	@JsonProperty("Question")
+	private String Question;
 	
-	private String CF_Type__c;
+	@JsonProperty("QuestProcessHeader")
+	private String QuestProcessHeader;
+	
+	@JsonProperty("QuestItemId")
+	private String QuestItemId;
 	
 	private QuesProcessHeaderModel CF_Questionnaire_Header__c;
 
     public QuesProcessLineItemModel() {}
     
-	public String getName() {
-		return Name;
+	public String getComments() {
+		return Comments;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setComments(String comments) {
+		Comments = comments;
 	}
 
-	public String getCF_Answer__c() {
-		return CF_Answer__c;
+	public String getAnswer() {
+		return Answer;
 	}
 
-	public void setCF_Answer__c(String cF_Answer__c) {
-		CF_Answer__c = cF_Answer__c;
+	public void setAnswer(String answer) {
+		Answer = answer;
 	}
 
-	public String getCF_Comments__c() {
-		return CF_Comments__c;
+	public String getPicklistOtions() {
+		return PicklistOtions;
 	}
 
-	public void setCF_Comments__c(String cF_Comments__c) {
-		CF_Comments__c = cF_Comments__c;
+	public void setPicklistOtions(String picklistOtions) {
+		PicklistOtions = picklistOtions;
 	}
 
-	public String getCF_Help_Text__c() {
-		return CF_Help_Text__c;
+	public String getHelpText() {
+		return HelpText;
 	}
 
-	public void setCF_Help_Text__c(String cF_Help_Text__c) {
-		CF_Help_Text__c = cF_Help_Text__c;
+	public void setHelpText(String helpText) {
+		HelpText = helpText;
 	}
 
-	public String getCF_Picklist_Options__c() {
-		return CF_Picklist_Options__c;
+	public String getType() {
+		return Type;
 	}
 
-	public void setCF_Picklist_Options__c(String cF_Picklist_Options__c) {
-		CF_Picklist_Options__c = cF_Picklist_Options__c;
+	public void setType(String type) {
+		Type = type;
 	}
 
-	public String getCF_Question__c() {
-		return CF_Question__c;
+	public String getQuestion() {
+		return Question;
 	}
 
-	public void setCF_Question__c(String cF_Question__c) {
-		CF_Question__c = cF_Question__c;
+	public void setQuestion(String question) {
+		Question = question;
 	}
 
-	public String getCF_Type__c() {
-		return CF_Type__c;
+	public String getQuestProcessHeader() {
+		return QuestProcessHeader;
 	}
 
-	public void setCF_Type__c(String cF_Type__c) {
-		CF_Type__c = cF_Type__c;
+	public void setQuestProcessHeader(String questProcessHeader) {
+		QuestProcessHeader = questProcessHeader;
+	}
+
+	public String getQuestItemId() {
+		return QuestItemId;
+	}
+
+	public void setQuestItemId(String questItemId) {
+		QuestItemId = questItemId;
 	}
 
 	public QuesProcessHeaderModel getCF_Questionnaire_Header__c() {

@@ -5,6 +5,8 @@
 
 package com.aspigrow.portel.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Model class used to expose this attribute with UI 
  * and make getting UI input as below Model format to perform
@@ -21,26 +23,61 @@ public class OpportunityModel {
    
 	private String externalId;
 	
-	private String Name;
+	@JsonProperty("QuesId")
+	private String QuesId;
 	
-	private AccountModel Account;
+	@JsonProperty("oppId")
+	private String oppId;
+	
+	@JsonProperty("OppName")
+	private String OppName;
+	
+	@JsonProperty("Account")
+	private String Account;
+	
+	@JsonProperty("QuestProcessHeader")
+	private QuesProcessHeaderModel QuestProcessHeader;
 	
     public OpportunityModel() {}
     
-	public String getName() {
-		return Name;
+	public String getQuesId() {
+		return QuesId;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setQuesId(String quesId) {
+		QuesId = quesId;
 	}
 
-	public AccountModel getAccount() {
+	public String getOppId() {
+		return oppId;
+	}
+
+	public void setOppId(String oppId) {
+		this.oppId = oppId;
+	}
+
+	public String getOppName() {
+		return OppName;
+	}
+
+	public void setOppName(String oppName) {
+		OppName = oppName;
+	}
+
+	public String getAccount() {
 		return Account;
 	}
 
-	public void setAccount(AccountModel account) {
+	public void setAccount(String account) {
 		Account = account;
+	}
+
+	public QuesProcessHeaderModel getQuestProcessHeader() {
+		return QuestProcessHeader;
+	}
+
+	public void setQuestProcessHeader(QuesProcessHeaderModel questProcessHeader) {
+		QuestProcessHeader = questProcessHeader;
 	}
 
 	public String getExternalId() {

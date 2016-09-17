@@ -26,10 +26,10 @@ public class AccountModelConvertor implements Convertor<AccountModel, Account> {
             return null;
         }
         Account account = new Account();
-        account.setAcctNumber(model.getAccountNumber());
-        account.setName(model.getName());
-        account.setSite(model.getSite());
-        account.setExternalId(model.getExternalId());
+        account.setAcctNumber(model.getAccNumber());
+        account.setName(model.getAccName());
+        account.setSite(model.getAccSite());
+        account.setExternalId(model.getAccId());
         return account;
     }
 
@@ -39,10 +39,9 @@ public class AccountModelConvertor implements Convertor<AccountModel, Account> {
             return null;
         }
         AccountModel account = new AccountModel();
-        account.setExternalId(entity.getExternalId());
-        account.setAccountNumber(entity.getAcctNumber());
-        account.setName(entity.getName());
-        account.setSite(entity.getSite());
+        account.setAccId(entity.getExternalId());
+        account.setAccName(entity.getSite());
+        account.setAccNumber(entity.getAcctNumber());
         return account;
     }
 

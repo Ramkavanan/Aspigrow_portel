@@ -12,9 +12,9 @@
   	
   	<!-- Build plugins properties -->
   	<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
-  	<jdk.source>1.7</jdk.source>
+  	<jdk.source>1.8</jdk.source>
 
-  	<jdk.target>1.7</jdk.target>
+  	<jdk.target>1.8</jdk.target>
   	<maven-war-plugin.version>2.3</maven-war-plugin.version>
   	<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
   	<targetFolder>${basedir}\target</targetFolder>
