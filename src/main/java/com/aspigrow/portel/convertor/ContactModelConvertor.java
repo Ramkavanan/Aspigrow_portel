@@ -45,6 +45,7 @@ public class ContactModelConvertor implements Convertor<ContactModel, Contact> {
         contact.setFirstName(entity.getFirstName());
         contact.setLastName(entity.getLastName());
         contact.setPhone(entity.getPhone());
+        contact.setContId(entity.getSalesforceId());
         return contact;
     }
 

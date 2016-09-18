@@ -32,6 +32,7 @@ import com.aspigrow.portel.model.QuesProcessHeaderModel;
 import com.aspigrow.portel.model.QuesProcessLineItemModel;
 import com.aspigrow.portel.model.UserModel;
 import com.aspigrow.portel.service.AccountService;
+import com.aspigrow.portel.service.SalesforceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
@@ -51,17 +52,17 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 		+ "to refer in future in user need time to read.")
 public class SalesforceResource {
 	
-    private AccountService accountService;
+    private SalesforceService salesforceService;
 
     @Autowired
-    public SalesforceResource(AccountService accountService) {
-	   this.accountService = accountService;
+    public SalesforceResource(SalesforceService salesforceService) {
+	   this.salesforceService = salesforceService;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/create")
+    @Path("/import")
     @ApiOperation(
             value = "Register a new salesforce",
             response = AccountModel.class)
@@ -79,7 +80,8 @@ public class SalesforceResource {
     		System.out.println("Question Process Header === "+qphm.getQuesName());
     		QuesProcessLineItemModel[] qplt = qphm.getQuestProcessLineItems();
     		System.out.println("Ques Linre Item Size === "+qplt.length);
-    		
+    		boolean isImported = salesforceService.importSalesforceData(acctModel);
+    		System.out.println("Status of Salesforce insert --- "+isImported);
     		return null;
     	} catch(Exception ex) {
     		ex.printStackTrace();

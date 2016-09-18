@@ -28,6 +28,8 @@ public class OpportunityModelConvertor implements Convertor<OpportunityModel, Op
         Opportunity opportunity = new Opportunity();
         opportunity.setExternalId(model.getExternalId());
         opportunity.setName(model.getOppName());
+        opportunity.setOppId(model.getOppId());
+        opportunity.setQuesId(model.getQuesId());
         return opportunity;
     }
 
@@ -39,6 +41,8 @@ public class OpportunityModelConvertor implements Convertor<OpportunityModel, Op
         OpportunityModel opportunity = new OpportunityModel();
         opportunity.setExternalId(entity.getExternalId());
         opportunity.setOppName(entity.getName());
+        opportunity.setOppId(entity.getOppId());
+        opportunity.setQuesId(entity.getQuesId());
         return opportunity;
     }
 
