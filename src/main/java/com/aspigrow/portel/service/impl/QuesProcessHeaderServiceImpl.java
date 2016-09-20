@@ -5,12 +5,19 @@
 
 package com.aspigrow.portel.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aspigrow.persistence.dao.QuestionriesProposalHeaderDao;
+import com.aspigrow.persistence.entities.sObject.QuestionriesProposalHeader;
+import com.aspigrow.persistence.entities.sObject.QuestionriesProposalLineItem;
 import com.aspigrow.portel.convertor.QuesProcessHeaderModelConvertor;
+import com.aspigrow.portel.convertor.QuesProcessLineItemModelConvertor;
 import com.aspigrow.portel.model.QuesProcessHeaderModel;
+import com.aspigrow.portel.model.QuesProcessLineItemModel;
 import com.aspigrow.portel.service.QuesProcessHeaderService;
 
 /**
@@ -24,11 +31,15 @@ public class QuesProcessHeaderServiceImpl implements QuesProcessHeaderService {
 	private QuestionriesProposalHeaderDao quesHeaderDao;
 	
 	private QuesProcessHeaderModelConvertor convertor;
+	
+	private QuesProcessLineItemModelConvertor lineItemConvertor;
 
     @Autowired
-    public QuesProcessHeaderServiceImpl(QuestionriesProposalHeaderDao quesHeaderDao, QuesProcessHeaderModelConvertor convertor) {
+    public QuesProcessHeaderServiceImpl(QuestionriesProposalHeaderDao quesHeaderDao, QuesProcessHeaderModelConvertor convertor,
+    		 QuesProcessLineItemModelConvertor lineItemConvertor) {
         this.quesHeaderDao = quesHeaderDao;
         this.convertor = convertor;
+        this.lineItemConvertor = lineItemConvertor;
     }
 
     @Override
@@ -88,6 +99,33 @@ public class QuesProcessHeaderServiceImpl implements QuesProcessHeaderService {
 				return null;
 			return 	convertor.convertToModel(quesHeaderDao.getQuestionriesProposalHeader(quesHeaderId));	
 		} catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public List<QuesProcessHeaderModel> getQuesProcessHeaderByContactId(String contactId) throws Exception {
+		List<QuesProcessHeaderModel> modelList = new ArrayList<QuesProcessHeaderModel>();
+		try{
+			if(contactId == null || contactId.length() <= 0)
+				return null;
+			List<QuestionriesProposalHeader> headers = quesHeaderDao.getQuestionriesProposalHeaderByContactId(contactId);
+			System.out.println("Header Size ---- "+headers.size());
+			for(QuestionriesProposalHeader header : headers) {
+				QuesProcessHeaderModel headerModel = convertor.convertToModel(header);	
+				List<QuesProcessLineItemModel> items = new ArrayList<QuesProcessLineItemModel>();
+				for(QuestionriesProposalLineItem lineItem : header.getQuesProcessLineItems()) {
+					System.out.println("Line item id ---- "+lineItem.getQuestion());
+					QuesProcessLineItemModel line = lineItemConvertor.convertToModel(lineItem);
+					items.add(line);
+				}
+				System.out.println("List Size ==== "+items.size());
+				QuesProcessLineItemModel[] arrayItem = new QuesProcessLineItemModel[items.size()];
+				headerModel.setQuestProcessLineItems(items.toArray(arrayItem)); 
+				modelList.add(headerModel);
+			}
+			return modelList;
+		} catch(Exception ex) {
+			ex.printStackTrace();
 			return null;
 		}
 	}

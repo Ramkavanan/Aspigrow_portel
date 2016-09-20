@@ -6,7 +6,7 @@ public interface UserService {
 
     UserModel save(UserModel user);
 
-    UserModel login(UserModel user);
+    UserModel login(UserModel user) throws Exception;
     
     UserModel update(UserModel user);
     

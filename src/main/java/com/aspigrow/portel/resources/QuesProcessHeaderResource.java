@@ -171,13 +171,37 @@ public class QuesProcessHeaderResource {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Input data error"),
             @ApiResponse(code = 500, message = "Internal server error")})
-    public Response getQuesProcessHeader(@PathParam("quesHeaderId")String quesHeaderId ) {
+    public Response getQuesProcessHeaderByContactId(@PathParam("quesHeaderId")String quesHeaderId ) {
     	try{
     		if(quesHeaderId == null || quesHeaderId.isEmpty())
     			return Response.status(400)
     		            .entity(new ErrorResponseWrapper(
                                 new ErrorResponse("Data error", "QuesProcessHeader id not valid", Response.Status.BAD_REQUEST.getStatusCode()))).build();
     		 return Response.status(200).entity(quesHeaderService.getQuesProcessHeaderById(quesHeaderId)).build();
+    	} catch(Exception e) {
+    		return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+            .entity(e)
+            .build();
+    	}
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/questionaries/{contactId}")
+    @ApiOperation(
+            value = "Resend email code",
+            response = QuesProcessHeaderModel.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Input data error"),
+            @ApiResponse(code = 500, message = "Internal server error")})
+    public Response getQuesProcessHeader(@PathParam("contactId")String contactId ) {
+    	try{
+    		if(contactId == null || contactId.isEmpty())
+    			return Response.status(400)
+    		            .entity(new ErrorResponseWrapper(
+                                new ErrorResponse("Data error", "QuesProcessHeader contact Id is not valid", Response.Status.BAD_REQUEST.getStatusCode()))).build();
+    		 return Response.status(200).entity(quesHeaderService.getQuesProcessHeaderByContactId(contactId)).build();
     	} catch(Exception e) {
     		return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
             .entity(e)

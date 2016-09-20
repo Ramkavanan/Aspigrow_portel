@@ -102,11 +102,11 @@ public class UserResource {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Input data error"),
             @ApiResponse(code = 500, message = "Internal server error")})
-    public Response doLogin(@RequestBody String json) {
+    public Response doLogin(@RequestBody UserModel user) {
 	System.out.println("Came Resource iumpl");
         try {
-        	ObjectMapper objectMapper = new ObjectMapper();
-        	UserModel user = objectMapper.readValue(json, UserModel.class);
+        	//ObjectMapper objectMapper = new ObjectMapper();
+        	//UserModel user = objectMapper.readValue(json, UserModel.class);
         	if(user.getEmailId() == null || user.getPassword() == null){
                 return Response.status(400)
                         .entity(null).build();

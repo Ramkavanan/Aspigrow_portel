@@ -43,15 +43,15 @@ public class RestConfiguration{
     @Bean
     public JavaMailSender mailSender() {
     	JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-    	//mailSender.setHost("smtp.elasticemail.com");
-    	mailSender.setHost("52.66.70.142");
-    	//mailSender.setPort(2525);
-    	mailSender.setPort(25);
+    	mailSender.setHost("smtp.elasticemail.com");
+    	//mailSender.setHost("52.66.70.142");
+    	mailSender.setPort(2525);
+    	//mailSender.setPort(25);
     	mailSender.setProtocol("smtp");
-    	mailSender.setUsername("admin@webserver.fashnoid.com");
-    	mailSender.setPassword("admin");
-    	//mailSender.setUsername("ramachandran.shinnedhawks@gmail.com"); // specify in molgenis-server.properties
-    	//mailSender.setPassword("a0026de0-d957-4fc0-bdcb-57eb0fddf706"); // specify in molgenis-server.properties
+    	//mailSender.setUsername("admin@webserver.fashnoid.com");
+    	//mailSender.setPassword("admin");
+    	mailSender.setUsername("ramachandran.shinnedhawks@gmail.com"); // specify in molgenis-server.properties
+    	mailSender.setPassword("a0026de0-d957-4fc0-bdcb-57eb0fddf706"); // specify in molgenis-server.properties
     	Properties javaMailProperties = new Properties();
     	javaMailProperties.setProperty("mail.smtp.auth", "true");
     	javaMailProperties.setProperty("mail.smtp.starttls.enable", "false");

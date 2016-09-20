@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import com.aspigrow.portel.convertor.AddressConvertor;
+import com.aspigrow.portel.convertor.ContactModelConvertor;
 import com.aspigrow.portel.convertor.UserModelConvertor;
 import com.aspigrow.portel.exception.CommonRuntimeException;
 import com.aspigrow.portel.model.UserModel;
@@ -29,19 +30,22 @@ public class UserServiceImpl implements UserService {
     private AddressConvertor addressConvertor;
     
     private AddressDao addressDao;
+    
+    private ContactModelConvertor contactConvertor;
 
     @Autowired
     public UserServiceImpl(UserDao userDao, MailSender mailSender, UserModelConvertor userConvertor
-    		, AddressConvertor addressConvertor, AddressDao addressDao) {
+    		, AddressConvertor addressConvertor, AddressDao addressDao, ContactModelConvertor contactConvertor) {
         this.userDao = userDao;
         this.mailSender = mailSender;
         this.userConvertor = userConvertor;
         this.addressConvertor = addressConvertor;
         this.addressDao = addressDao;
+        this.contactConvertor = contactConvertor;
     }
     
     @Override
-    public UserModel login(UserModel user){
+    public UserModel login(UserModel user) throws Exception{
         /**Customer customerEntity = customerDao.findByEmail(customer.getEmailId());
         if (customerEntity != null) {
             return convertToModel(customerEntity);
@@ -49,14 +53,14 @@ public class UserServiceImpl implements UserService {
     	
     //Check Maill sending 
     	
-	UserModelConvertor convertor = new UserModelConvertor();
-   	User userInfo =  userDao.loadUserByUsername(user.getEmailId());
-   	System.out.println("Log in user Info "+userInfo);
-   	if(userInfo == null)
-   		return null;
-   	//if(userInfo.)
-   	//System.out.println("Customer Info "+userInfo.toString());
-    	return convertor.convertToModel(userInfo);
+    	UserModelConvertor convertor = new UserModelConvertor();
+    	User userInfo =  userDao.loadUserByUsername(user.getEmailId());
+    	System.out.println("Log in user Info "+userInfo);
+   		if(userInfo == null)
+   			return null;
+   		user = convertor.convertToModel(userInfo);
+   		user.setContact(contactConvertor.convertToModel(userInfo.getContact()));
+   		return user;
     }
     
     @Override

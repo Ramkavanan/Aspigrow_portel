@@ -8,6 +8,7 @@ package com.aspigrow.portel.convertor;
 import org.springframework.stereotype.Component;
 
 import com.aspigrow.portel.model.QuesProcessHeaderModel;
+import com.aspigrow.portel.model.QuesProcessLineItemModel;
 import com.aspigrow.persistence.entities.sObject.QuestionriesProposalHeader;
 
 /**

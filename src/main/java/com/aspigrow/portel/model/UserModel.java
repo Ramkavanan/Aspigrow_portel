@@ -31,8 +31,17 @@ public class UserModel implements Serializable {
     private String password;
     private boolean isEnabled;
     private AddressModel address;
+    private ContactModel contact;
+    
+    public ContactModel getContact() {
+		return contact;
+	}
 
-    public boolean isEnabled() {
+	public void setContact(ContactModel contact) {
+		this.contact = contact;
+	}
+
+	public boolean isEnabled() {
 		return isEnabled;
 	}
 

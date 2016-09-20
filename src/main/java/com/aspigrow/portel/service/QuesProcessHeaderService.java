@@ -5,6 +5,8 @@
 
 package com.aspigrow.portel.service;
 
+import java.util.List;
+
 import com.aspigrow.portel.model.QuesProcessHeaderModel;
 
 /**
@@ -58,4 +60,14 @@ public interface QuesProcessHeaderService {
      * @return
      */
 	QuesProcessHeaderModel getQuesProcessHeaderById(String quesHeaderId) throws Exception;
+	
+	/**
+	 * Pulling the quesHeader information based on the contact id.
+     * this service provide the bridge to pulling data from QuesProcessHeader Dao
+     * 
+	 * @param contactId
+	 * @return
+	 * @throws Exception
+	 */
+	List<QuesProcessHeaderModel> getQuesProcessHeaderByContactId(String contactId) throws Exception;
 }
