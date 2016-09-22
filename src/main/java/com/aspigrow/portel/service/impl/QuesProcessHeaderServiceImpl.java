@@ -6,7 +6,9 @@
 package com.aspigrow.portel.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,19 +112,24 @@ public class QuesProcessHeaderServiceImpl implements QuesProcessHeaderService {
 				return null;
 			List<QuestionriesProposalHeader> headers = quesHeaderDao.getQuestionriesProposalHeaderByContactId(contactId);
 			System.out.println("Header Size ---- "+headers.size());
+			Set<Integer> headersFilter = new HashSet<Integer>();
 			for(QuestionriesProposalHeader header : headers) {
-				QuesProcessHeaderModel headerModel = convertor.convertToModel(header);	
-				List<QuesProcessLineItemModel> items = new ArrayList<QuesProcessLineItemModel>();
-				for(QuestionriesProposalLineItem lineItem : header.getQuesProcessLineItems()) {
-					System.out.println("Line item id ---- "+lineItem.getQuestion());
-					QuesProcessLineItemModel line = lineItemConvertor.convertToModel(lineItem);
-					items.add(line);
+				if(!headersFilter.contains(header.getId())) {
+					QuesProcessHeaderModel headerModel = convertor.convertToModel(header);	
+					List<QuesProcessLineItemModel> items = new ArrayList<QuesProcessLineItemModel>();
+					for(QuestionriesProposalLineItem lineItem : header.getQuesProcessLineItems()) {
+						System.out.println("Line item id ---- "+lineItem.getQuestion());
+						QuesProcessLineItemModel line = lineItemConvertor.convertToModel(lineItem);
+						items.add(line);
+					}
+					System.out.println("List Size ==== "+items.size());
+					QuesProcessLineItemModel[] arrayItem = new QuesProcessLineItemModel[items.size()];
+					headerModel.setQuestProcessLineItems(items.toArray(arrayItem)); 
+					modelList.add(headerModel);
+					headersFilter.add(header.getId());
 				}
-				System.out.println("List Size ==== "+items.size());
-				QuesProcessLineItemModel[] arrayItem = new QuesProcessLineItemModel[items.size()];
-				headerModel.setQuestProcessLineItems(items.toArray(arrayItem)); 
-				modelList.add(headerModel);
 			}
+			System.out.println("Size of the model list ---- "+modelList.size());
 			return modelList;
 		} catch(Exception ex) {
 			ex.printStackTrace();
