@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     			
         	SimpleMailMessage sm = new SimpleMailMessage();
         	sm.setTo(mailId);
-        	sm.setFrom("ramakavanan@gmail.com");
+        	sm.setFrom("support@aspigrow.com");
         	sm.setSubject("Hi");
         	sm.setText("Please use this code and finis your signup process : "+code);
         	mailSender.send(sm);

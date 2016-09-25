@@ -51,6 +51,16 @@ public class QuesProcessHeaderModelConvertor implements Convertor<QuesProcessHea
 
     @Override
     public void updateEntityWithModel(QuestionriesProposalHeader toUpdate, QuesProcessHeaderModel model) {
-    	
+    	if(model != null) {
+    		if(model.getStatus() != null ) {
+    			toUpdate.setStatus(model.getStatus());
+    		}
+    		if(model.getExternalId() != null ) {
+    			toUpdate.setExternalId(model.getExternalId());
+    		}
+    		if(model.getQuesName() != null ) {
+    			toUpdate.setQuesName(model.getQuesName());
+    		}
+    	}
     }
 }

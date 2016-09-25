@@ -70,4 +70,6 @@ public interface QuesProcessHeaderService {
 	 * @throws Exception
 	 */
 	List<QuesProcessHeaderModel> getQuesProcessHeaderByContactId(String contactId) throws Exception;
+	
+	boolean saveAnswer(QuesProcessHeaderModel quesHeader) throws Exception;
 }

@@ -136,4 +136,41 @@ public class QuesProcessHeaderServiceImpl implements QuesProcessHeaderService {
 			return null;
 		}
 	}
+	
+	@Override
+	public boolean saveAnswer(QuesProcessHeaderModel model) throws Exception {
+		try{
+			System.out.println("Implemented to save  ----------------- ");
+			if(model.getExternalId() == null)
+			 	throw new Exception("Prohibitted operation");
+			QuestionriesProposalHeader header = quesHeaderDao.getQuestionriesProposalHeader(model.getExternalId());
+			header.setStatus("Submitted");
+			System.out.println("Header information ---- "+header.getName()+" headr  "+model.getStatus());
+			System.out.println("Header Sixe" + header.getQuesProcessLineItems().size());
+			//convertor.updateEntityWithModel(header, model);
+			Set<QuestionriesProposalLineItem> lineItems = new HashSet<QuestionriesProposalLineItem>();
+			QuesProcessLineItemModel[] modelLineItems = model.getQuestProcessLineItems();
+			for(QuesProcessLineItemModel modelItem : modelLineItems) {
+				for(QuestionriesProposalLineItem lineItem : header.getQuesProcessLineItems()) {
+					if(modelItem.getExternalId().equalsIgnoreCase(lineItem.getExternalId())) {
+						lineItem.setAnswer(modelItem.getAnswer());
+						lineItem.setComment(modelItem.getComments());
+						//lineItemConvertor.updateEntityWithModel(lineItem, modelItem);
+						System.out.println(modelItem.getAnswer() + " Commnd --- "+modelItem.getComments());
+						System.out.println("Linre item ---- "+lineItem.getId()+"    ans "+lineItem.getAnswer());
+						lineItems.add(lineItem);
+					}
+				}
+			}
+			header.setQuesProcessLineItems(lineItems);
+			System.out.println("Model answer  ---- "+header.toString());
+			header = quesHeaderDao.updateQuestionriesProposalHeader(header);
+		//	model = convertor.convertToModel(quesHeaderDao.updateQuestionriesProposalHeader(convertor.convertToEntity(model)));
+			return true;
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			return false;		
+		}	
+	}
 }

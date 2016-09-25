@@ -108,6 +108,36 @@ public class QuesProcessHeaderResource {
     	}
 	
     }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/saveAnswer")
+    @ApiOperation(
+            value = "Save the header Answer Header",
+            response = QuesProcessHeaderModel.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Input data error"),
+            @ApiResponse(code = 500, message = "Internal server error")})
+    public Response saveAnswer(@RequestBody QuesProcessHeaderModel quesHeader) {
+    	try{
+    		if (quesHeader.getExternalId() == null) {
+    			return Response.status(400)
+    		            .entity(new ErrorResponseWrapper(
+                                new ErrorResponse("Data error", "QuesProcessHeader id not valid", Response.Status.BAD_REQUEST.getStatusCode()))).build();
+            } else {
+            	boolean status = quesHeaderService.saveAnswer(quesHeader);
+            	if(status == false) 
+            		return Response.status(400).entity(null).build();
+            	return Response.status(200).entity(status).build();
+            }
+    	} catch( Exception ex) {
+    		return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new ErrorResponseWrapper(
+                            new ErrorResponse("Some error occurred", ex.getMessage(), Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()))).build();
+    	}
+	
+    }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -190,7 +220,7 @@ public class QuesProcessHeaderResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/questionaries/{contactId}")
     @ApiOperation(
-            value = "Resend email code",
+            value = "Get questionaries based on contact",
             response = QuesProcessHeaderModel.class)
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Input data error"),

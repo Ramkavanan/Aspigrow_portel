@@ -58,6 +58,16 @@ public class QuesProcessLineItemModelConvertor implements Convertor<QuesProcessL
 
     @Override
     public void updateEntityWithModel(QuestionriesProposalLineItem toUpdate, QuesProcessLineItemModel model) {
-    	
+    	if(model != null) {
+    		if(model.getAnswer() != null ) {
+    			toUpdate.setAnswer(model.getAnswer());
+    		}
+    		if(model.getComments() != null ) {
+    			toUpdate.setComment(model.getComments());
+    		}
+    		if(model.getExternalId() != null ) {
+    			toUpdate.setExternalId(model.getExternalId());
+    		}
+    	}
     }
 }

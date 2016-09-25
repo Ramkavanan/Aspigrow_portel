@@ -136,7 +136,7 @@ public class SalesforceServiceImpl implements SalesforceService {
 				users.add(user);
 				SimpleMailMessage sm = new SimpleMailMessage();
 	        	sm.setTo(user.getEmail());
-	        	sm.setFrom("ramchandran@aspigrow.com");
+	        	sm.setFrom("support@aspigrow.com");
 	        	sm.setSubject("Hi");
 	        	sm.setText("Please use this credential to login our service portel <br/>"
 	        			+ "<b> User Name </b> :  "+user.getEmail()+"<br/> Password : "
